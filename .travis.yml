@@ -19,13 +19,13 @@ before_script:
   - sudo apt-get -qq update
   - sudo apt-get install -y qemu libvirt-daemon ovmf genisoimage libvirt-dev qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
   - sudo systemctl enable --now libvirtd
-  - echo -e "<pool type='dir'>\n<name>default</name>\n<target>\n<path>/pool-default</path>\n</target>\n</pool>" > pool.xml
-  - sudo mkdir /pool-default
-  - sudo chmod a+rwx /pool-default
-  - sudo virsh pool-define pool.xml
-  - sudo virsh pool-start default
-  - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
-  - sudo systemctl restart libvirtd
+    #  - echo -e "<pool type='dir'>\n<name>default</name>\n<target>\n<path>/pool-default</path>\n</target>\n</pool>" > pool.xml
+    #  - sudo mkdir /pool-default
+    #  - sudo chmod a+rwx /pool-default
+    #  - sudo virsh pool-define pool.xml
+    #  - sudo virsh pool-start default
+    #  - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
+    #  - sudo systemctl restart libvirtd
   - sudo adduser $USER libvirt
   - sudo adduser $USER kvm
 addons:

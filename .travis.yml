@@ -18,7 +18,7 @@ before_script:
   - tar xzf /tmp/terraform-provider-libvirt.tar.gz -C ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/linux_amd64/
   - sudo apt-get -qq update
   - sudo apt-get install -y qemu libvirt-daemon ovmf genisoimage libvirt-dev
-  - systemctl enable --now libvirtd
+  - sudo systemctl enable --now libvirtd
   - echo -e "<pool type='dir'>\n<name>default</name>\n<target>\n<path>/pool-default</path>\n</target>\n</pool>" > pool.xml
   - sudo mkdir /pool-default
   - sudo chmod a+rwx /pool-default

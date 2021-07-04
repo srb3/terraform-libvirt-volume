@@ -19,13 +19,13 @@ before_script:
   - sudo apt-get -qq update
   - sudo apt-get install -y qemu libvirt-daemon ovmf genisoimage libvirt-dev qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
   - sudo systemctl enable --now libvirtd
-    #  - echo -e "<pool type='dir'>\n<name>default</name>\n<target>\n<path>/pool-default</path>\n</target>\n</pool>" > pool.xml
-    #  - sudo mkdir /pool-default
-    #  - sudo chmod a+rwx /pool-default
-    #  - sudo virsh pool-define pool.xml
-    #  - sudo virsh pool-start default
-    #  - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
-    #  - sudo systemctl restart libvirtd
+  - echo -e "<pool type='dir'>\n<name>default</name>\n<target>\n<path>/pool-default</path>\n</target>\n</pool>" > pool.xml
+  - sudo mkdir /pool-default
+  - sudo chmod a+rwx /pool-default
+  - sudo virsh pool-define pool.xml
+  - sudo virsh pool-start default
+  - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
+  - sudo systemctl restart libvirtd
   - sudo adduser $USER libvirt
   - sudo adduser $USER kvm
 addons:
@@ -39,8 +39,8 @@ addons:
     - xsltproc
 script:
   - sudo -E su $USER -c 'make build'
-  - virsh pool-list --all
-  - sudo -E su $USER -c 'virsh pool-list --all'
+  - virsh --debug=4 --connect=qemu+unix:///session pool-list --all
+  - sudo -E su $USER -c 'virsh --debug=4 --connect=qemu+unix://session pool-list --all'
   - virsh vol-dumpxml $(awk '/expected_base_volume_name/{print $2}' test/integration/attributes/default/attrs.yml  | sed 's/\"//g') --pool default
   - sudo -E su $USER -c "virsh vol-dumpxml $(awk '/expected_base_volume_name/{print $2}' test/integration/attributes/default/attrs.yml  | sed 's/\"//g') --pool default"
   - sudo -E su $USER -c 'make test'

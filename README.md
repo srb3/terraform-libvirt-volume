@@ -36,6 +36,4 @@ module "my-domain" {
 
 ## Testing
 
-This module uses kitchen-terraform to test its self. To install you can use the
-`Gemfile`. You will need Ruby (ruby devel needed as well) installed and bundler,
-then you can run `bundle install` in the repos home directory
+This module uses a Makefile and cinc-auditor to deploy the code and run tests.

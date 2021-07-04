@@ -39,7 +39,7 @@ addons:
     - xsltproc
 script:
   - sudo -E su $USER -c 'make build'
-  - sudo -E su $USER -c 'virsh vol-dumpxml $(awk \'/expected_base_volume_name/{print$2}\' test/integration/attributes/default/attrs.yml  | sed \'s/"//g\') --pool default'
-  - virsh vol-dumpxml $(awk \'/expected_base_volume_name/{print$2}\' test/integration/attributes/default/attrs.yml  | sed \'s/"//g\') --pool default
+  - sudo -E su $USER -c "virsh vol-dumpxml $(awk '/expected_base_volume_name/{print $2}' test/integration/attributes/default/attrs.yml  | sed 's/\"//g') --pool default"
+  - virsh vol-dumpxml $(awk '/expected_base_volume_name/{print $2}' test/integration/attributes/default/attrs.yml  | sed 's/\"//g') --pool default
   - sudo -E su $USER -c 'make test'
   - sudo -E su $USER -c 'make clean'

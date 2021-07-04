@@ -38,6 +38,6 @@ addons:
     - genisoimage
     - xsltproc
 script:
-  - make build
-  - make test
-  - make clean
+  - sudo make build
+  - sudo make test
+  - sudo make clean

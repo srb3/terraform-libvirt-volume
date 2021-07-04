@@ -26,6 +26,8 @@ before_script:
   - sudo virsh pool-start default
   - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
   - sudo systemctl restart libvirtd
+  - sudo adduser $USER libvirt
+  - sudo adduser $USER kvm
 addons:
   apt:
     packages:

@@ -38,7 +38,10 @@ addons:
     - genisoimage
     - xsltproc
 script:
+  - id
   - groups
-  - make build
-  - make test
-  - make clean
+  - sudo -E su $USER -c 'id'
+  - sudo -E su $USER -c 'groups'
+  - sudo -E su $USER -c 'make build'
+  - sudo -E su $USER -c 'make test'
+  - sudo -E su $USER -c 'make clean'

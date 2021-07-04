@@ -13,6 +13,9 @@ before_script:
   - sudo unzip /tmp/terraform.zip -d /usr/local/bin
   - curl -o /tmp/cinc-auditor.deb http://downloads.cinc.sh/files/stable/cinc-auditor/4.37.0/ubuntu/20.04/cinc-auditor_4.37.0-1_amd64.deb
   - sudo dpkg -i /tmp/cinc-auditor.deb
+  - mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/linux_amd64/
+  - curl -o /tmp/terraform-provider-libvirt.tar.gz https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.3/terraform-provider-libvirt-0.6.3+git.1604843676.67f4f2aa.Ubuntu_20.04.amd64.tar.gz
+  - tar xzf /tmp/terraform-provider-libvirt.tar.gz -C ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/linux_amd64/
 addons:
   apt:
     packages:

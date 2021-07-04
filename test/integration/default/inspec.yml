@@ -1,0 +1,9 @@
+---
+name: default
+inputs:
+  - name: expected_base_volume_name
+  - name: expected_base_volume_pool
+  - name: expected_base_volume_image_source
+  - name: expected_main_volume_name
+  - name: expected_main_volume_pool
+  - name: expected_main_volume_size

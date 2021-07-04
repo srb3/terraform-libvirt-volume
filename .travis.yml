@@ -23,7 +23,7 @@ before_script:
   - sudo mkdir /pool-default
   - sudo chmod a+rwx /pool-default
   - sudo virsh pool-define pool.xml
-  - sduo virsh pool-start default
+  - sudo virsh pool-start default
   - echo -e 'user = "root"\ngroup = "root"' | sudo tee -a /etc/libvirt/qemu.conf
   - sudo systemctl restart libvirtd
 addons:

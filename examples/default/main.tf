@@ -9,18 +9,10 @@ resource "random_id" "random" {
 locals {
   base_volume_name         = "base-test-${random_id.random.hex}"
   base_volume_pool         = "default"
-  base_volume_image_source = "https://cloud-images.ubuntu.com/releases/groovy/release/ubuntu-20.10-server-cloudimg-amd64-disk-kvm.img"
+  base_volume_image_source = "https://cloud-images.ubuntu.com/releases/hirsute/release/ubuntu-21.04-server-cloudimg-amd64-disk-kvm.img"
   main_volume_name         = "main-test-${random_id.random.hex}"
   main_volume_pool         = "default"
   main_volume_size         = 40000000000
-  test_outputs = {
-    "expected_base_volume_name"         = local.base_volume_name
-    "expected_base_volume_pool"         = local.base_volume_pool
-    "expected_base_volume_image_source" = local.base_volume_image_source
-    "expected_main_volume_name"         = local.main_volume_name
-    "expected_main_volume_pool"         = local.main_volume_pool
-    "expected_main_volume_size"         = local.main_volume_size
-  }
 }
 
 module "libvirt_domain_base" {
@@ -40,10 +32,24 @@ module "libvirt_domain_main" {
   depends_on       = [module.libvirt_domain_base]
 }
 
-# This file is only used by the testing scripts
-# It acts as config and is not executable
-resource "local_file" "attrs_create" {
-  content         = yamlencode(local.test_outputs)
-  filename        = "${path.root}/../../test/integration/attributes/default/attrs.yml"
-  file_permission = "0644"
+########### Testing data #########################
+
+# The local variables and the module below are
+# used to generate test data for this example.
+# They are not needed for the core libvirt
+# functionality
+locals {
+  attributes = {
+    expected_base_volume_name = local.base_volume_name
+    expected_base_volume_pool = local.base_volume_pool
+    expected_main_volume_name = local.main_volume_name
+    expected_main_volume_pool = local.main_volume_pool
+    expected_main_volume_size = local.main_volume_size
+  }
+}
+
+module "attributes" {
+  source     = "../test_attributes"
+  data       = yamlencode(local.attributes)
+  test_suite = "default"
 }

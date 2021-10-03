@@ -1,36 +1,25 @@
-.PHONY: all build test out clean
+.PHONY: all build test clean
 
 SHELL = /bin/bash
 
-all: build test
+all: all_default
 
-build: build_prep_default build_default
+all_default: build_default test_default clean_default
+build_default: build_deployment_default
+test_default: test_deployment_default
+clean_default: clean_deployment_default
 
-clean: clean_default
-
-build_prep_default:
+build_deployment_default:
 	@pushd examples/default; \
 	terraform init; \
-	popd
-
-build_default:
-	@pushd examples/default; \
 	terraform apply -auto-approve; \
 	popd
 
-test: test_default
-
-test_default:
+test_deployment_default:
 	cinc-auditor exec test/integration/default/ \
-		--input-file test/integration/attributes/default/attrs.yml \
-		--reporter=cli json:test-result-default-$$(date "+%Y.%m.%d-%H.%M.%S").json
+		--input-file test/integration/default/attrs.yml
 
-out_default:
-	@pushd examples/default; \
-	terraform output; \
-	popd
-
-clean_default:
+clean_deployment_default:
 	@pushd examples/default; \
 	terraform destroy -auto-approve; \
 	popd

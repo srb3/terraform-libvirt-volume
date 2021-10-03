@@ -29,7 +29,7 @@ module "libvirt_main_volume" {
   size             = local.main_volume_size
   base_volume_name = local.base_volume_name
   base_volume_pool = local.base_volume_pool
-  depends_on       = [module.libvirt_domain_base]
+  depends_on       = [module.libvirt_base_volume]
 }
 
 ########### Testing data #########################

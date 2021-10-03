@@ -15,14 +15,14 @@ locals {
   main_volume_size         = 40000000000
 }
 
-module "libvirt_domain_base" {
+module "libvirt_base_volume" {
   source       = "../../"
   name         = local.base_volume_name
   pool         = local.base_volume_pool
   image_source = local.base_volume_image_source
 }
 
-module "libvirt_domain_main" {
+module "libvirt_main_volume" {
   source           = "../../"
   name             = local.main_volume_name
   pool             = local.main_volume_pool

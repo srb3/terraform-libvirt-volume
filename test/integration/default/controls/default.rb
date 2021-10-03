@@ -2,7 +2,6 @@ require 'tempfile'
 
 expected_base_volume_name = input('expected_base_volume_name')
 expected_base_volume_pool = input('expected_base_volume_pool')
-expected_base_volume_image_source = input('expected_base_volume_image_source')
 expected_main_volume_name = input('expected_main_volume_name')
 expected_main_volume_pool = input('expected_main_volume_pool')
 expected_main_volume_size = input('expected_main_volume_size')
